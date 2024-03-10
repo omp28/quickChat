@@ -1,10 +1,11 @@
 const express = require("express");
 const chats = require("./data/data");
 const dotenv = require("dotenv");
-const cors = require("cors");
+const connectDB = require("./middleware/mongoose");
 
-const app = express();
 dotenv.config();
+connectDB();
+const app = express();
 
 app.get("/", (req, res) => {
   res.send("API is running suceessfully..");
