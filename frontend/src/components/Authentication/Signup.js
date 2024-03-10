@@ -37,7 +37,7 @@ const Signup = () => {
         <FormLabel>Email</FormLabel>
         <Input
           placeholder="Enter Your Email"
-          onChange={(e) => setName(e.target.value)}
+          onChange={(e) => setEmail(e.target.value)}
         />
       </FormControl>
 
@@ -47,7 +47,7 @@ const Signup = () => {
           <Input
             type={show ? "text" : "password"}
             placeholder="Enter Your Password"
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
           />
           <InputRightElement width="5rem">
             <Button h="1.75rem" size="sm" onClick={handClick}>
@@ -63,7 +63,7 @@ const Signup = () => {
           <Input
             type={show ? "text" : "password"}
             placeholder="Enter Your Confirm Password"
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => setConfirmPassword(e.target.value)}
           />
           <InputRightElement width="5rem">
             <Button h="1.75rem" size="sm" onClick={handClick}>
