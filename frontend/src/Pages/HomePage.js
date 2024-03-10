@@ -30,8 +30,8 @@ const HomePage = () => {
         <Box>
           <Tabs variant="soft-rounded" colorScheme="gray">
             <TabList>
-              <Tab>Tab 1</Tab>
-              <Tab>Tab 2</Tab>
+              <Tab>LogIn</Tab>
+              <Tab>SignUp</Tab>
             </TabList>
             <TabPanels>
               <TabPanel>
