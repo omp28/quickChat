@@ -3,6 +3,7 @@ const chats = require("./data/data");
 const dotenv = require("dotenv");
 const connectDB = require("./middleware/mongoose");
 const userRoutes = require("./routes/userRoutes");
+const { notfound, errorHandler } = require("./middleware/error");
 
 dotenv.config();
 connectDB();
@@ -16,8 +17,8 @@ app.use(express.json()); //to accept json data in the body
 
 app.use("/api/user", userRoutes);
 
-// app.use(notfound);
-// app.use(errorHandler);
+app.use(notfound);
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 3000;
 console.log("PORT", PORT);
