@@ -16,6 +16,9 @@ app.use(express.json()); //to accept json data in the body
 
 app.use("/api/user", userRoutes);
 
+// app.use(notfound);
+// app.use(errorHandler);
+
 const PORT = process.env.PORT || 3000;
 console.log("PORT", PORT);
 app.listen(PORT, console.log(`Server started on port ${PORT}`));
