@@ -1,5 +1,7 @@
 const expressAsyncHandler = require("express-async-handler");
 const User = require("../models/userModel");
+const { get } = require("mongoose");
+const generateToken = require("../middleware/generateToken");
 
 const registerUser = expressAsyncHandler(async (req, res) => {
   const { name, email, password, pic } = req.body;
@@ -26,6 +28,7 @@ const registerUser = expressAsyncHandler(async (req, res) => {
       name: user.name,
       email: user.email,
       pic: user.pic,
+      token: generateToken(user._id),
     });
   } else {
     res.status(400);

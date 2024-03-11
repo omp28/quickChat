@@ -12,6 +12,8 @@ app.get("/", (req, res) => {
   res.send("API is running suceessfully..");
 });
 
+app.use(express.json()); //to accept json data in the body
+
 app.use("/api/user", userRoutes);
 
 const PORT = process.env.PORT || 3000;
