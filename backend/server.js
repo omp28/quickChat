@@ -4,6 +4,7 @@ const dotenv = require("dotenv");
 const connectDB = require("./middleware/mongoose");
 const userRoutes = require("./routes/userRoutes");
 const { notfound, errorHandler } = require("./middleware/error");
+const chatRoutes = require("./routes/chatRoutes");
 
 dotenv.config();
 connectDB();
@@ -16,6 +17,7 @@ app.get("/", (req, res) => {
 app.use(express.json()); //to accept json data in the body
 
 app.use("/api/user", userRoutes);
+app.use("/api/chat", chatRoutes);
 
 app.use(notfound);
 app.use(errorHandler);
