@@ -122,7 +122,7 @@ const Signup = () => {
       });
       localStorage.setItem("userInfo", JSON.stringify(data));
       setLoading(false);
-      // useNavigate.push("/chats");
+      navigate("/chats");
     } catch (error) {
       toast({
         title: "Account creation failed.",

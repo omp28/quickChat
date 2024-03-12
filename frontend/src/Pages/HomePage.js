@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Box,
   Container,
@@ -12,6 +12,13 @@ import {
 import Login from "../components/Authentication/Login";
 import Signup from "../components/Authentication/Signup";
 const HomePage = () => {
+  useEffect(() => {
+    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    if (userInfo) {
+      window.location.href = "/chats";
+    }
+  }, []);
+
   return (
     <Box className="bg-black h-screen w-screen">
       <Container w="100%" maxW="xl" className=" pt-20 text-white">
