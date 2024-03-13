@@ -32,7 +32,7 @@ const accessChat = async (req, res) => {
     } else {
       const chatData = {
         chatName: "sender",
-        users: [req.user._id, userID],
+        users: [req.user._id, userID, req.body.userID],
         isGroupChat: false,
       };
 
@@ -60,7 +60,10 @@ const fetchChat = asyncHandler(async (req, res) => {
         });
         res.status(200).send(results);
       });
-  } catch (error) {}
+  } catch (error) {
+    console.error(error);
+    res.status(400).send("Error fetching chat");
+  }
 });
 
 const createGroupChat = asyncHandler(async (req, res) => {
