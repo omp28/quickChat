@@ -45,7 +45,7 @@ const MyChats = () => {
       p="2"
       alignItems="center"
       borderRadius="lg"
-      className="flex justify-around"
+      className="flex justify-around "
     >
       <Box
         pb={3}
