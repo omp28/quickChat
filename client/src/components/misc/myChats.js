@@ -4,6 +4,7 @@ import { Box, Button, Stack, Text, useToast } from "@chakra-ui/react";
 import { useState } from "react";
 import axios from "axios";
 import SkeletonChat from "../SkeletonChat";
+import NewGroupChat from "./NewGroupChat";
 
 const MyChats = () => {
   const { user, setUser, selectedChat, setSelectedChat, chats, setChats } =
@@ -56,7 +57,9 @@ const MyChats = () => {
         className="flex justify-around "
       >
         <h1 className=" text-2xl">My Chats</h1>
-        <Button d="flex">New Group Chat</Button>
+        <NewGroupChat>
+          <Button d="flex">New Group Chat</Button>
+        </NewGroupChat>
       </Box>
       <Box
         d="flex"
