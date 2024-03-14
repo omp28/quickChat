@@ -6,7 +6,7 @@ import axios from "axios";
 import SkeletonChat from "../SkeletonChat";
 import NewGroupChat from "./NewGroupChat";
 
-const MyChats = () => {
+const MyChats = ({ fetchAgain }) => {
   const { user, setUser, selectedChat, setSelectedChat, chats, setChats } =
     ChatState();
   const Toast = useToast();
@@ -35,7 +35,7 @@ const MyChats = () => {
   useEffect(() => {
     setLoggedUser(JSON.parse(localStorage.getItem("userInfo")));
     fetchChats();
-  }, []);
+  }, [fetchAgain]);
 
   return (
     <Box
