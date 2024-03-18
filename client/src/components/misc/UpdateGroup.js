@@ -112,6 +112,7 @@ const UpdateGroup = ({ fetchAgain, setFetchAgain }) => {
     <>
       {/* <Button onClick={onOpen}>Open Drawer</Button> */}
       <IconButton d="flex" onClick={onOpen} icon={<IoMdEye />} />
+
       <Modal onClose={onClose} isOpen={isOpen} isCentered>
         <ModalOverlay />
         <ModalContent>

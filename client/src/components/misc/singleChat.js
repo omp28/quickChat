@@ -22,15 +22,17 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
             alignItems="center"
           >
             <IoMdArrowRoundBack onClick={() => setSelectedChat("")} />
+
             {/* {!selectedChat.isGroupChat ? ( */}
             <>
               {/* {getSender(user, selectedChat.users)}
                 <ProfileModal user={getSenderFull(user, selectedChat.users)} /> */}
-              {selectedChat.chatName} Group Chat
+              {selectedChat.name}
             </>
             {/* ) : ( */}
             <>
               {/* {selectedChat.chatName.toUpperCase()} */}
+
               <UpdateGroup
                 // fetchMessages={fetchMessages}
                 fetchAgain={fetchAgain}
@@ -39,7 +41,6 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
             </>
             {/* )} */}
           </Text>
-
           <Box
             d="flex"
             flexDir="column"

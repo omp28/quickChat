@@ -38,6 +38,13 @@ const MyChats = ({ fetchAgain }) => {
     fetchChats();
   }, [fetchAgain]);
 
+  console.log("this is the user chat", chats);
+  console.log("this is the user ", user);
+
+  const getSender = (loggedUser, user) => {
+    return user[0]._id === user[0]._id ? user[1].name : user[0].name;
+  };
+
   return (
     <Box
       d={{ base: selectedChat ? "none" : "flex", md: "flex" }}
@@ -84,9 +91,14 @@ const MyChats = ({ fetchAgain }) => {
                 variant="ghost"
                 _hover={{ bg: "gray.200" }}
               >
-                <div className=" py-2 px-6 text-lg font-bold border-b-2 border-b-gray-300 rounded-lg ">
+                {/* <div className=" py-2 px-6 text-lg font-bold border-b-2 border-b-gray-300 rounded-lg ">
                   {chat.name}
-                </div>
+                </div> */}
+                <Text>
+                  {!chat.isGroupChat
+                    ? getSender(loggedUser, chat.user)
+                    : chat.chatName}
+                </Text>
               </Box>
             ))}
           </Stack>

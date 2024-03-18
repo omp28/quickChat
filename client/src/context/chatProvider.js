@@ -9,9 +9,9 @@ const ChatProvider = ({ children }) => {
     const userInfo = JSON.parse(localStorage.getItem("userInfo"));
     setUser(userInfo);
 
-    if (!userInfo) {
-      window.location.href = "/";
-    }
+    // if (!userInfo) {
+    //   window.location.href = "/";
+    // }
   }, [window.location.href]);
 
   return (

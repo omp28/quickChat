@@ -19,7 +19,7 @@ app.use(express.json()); //to accept json data in the body
 
 app.use("/api/user", userRoutes);
 app.use("/api/chat", chatRoutes);
-app.use("api/messages", messageRoutes);
+app.use("/api/messages", messageRoutes);
 
 app.use(notfound);
 app.use(errorHandler);

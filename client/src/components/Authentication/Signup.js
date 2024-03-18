@@ -71,7 +71,7 @@ const Signup = () => {
     }
   };
 
-  const submitHandler = () => {
+  const submitHandler = async () => {
     setLoading(true);
     if (!name || !email || !password || !confirmPassword) {
       toast({
@@ -105,12 +105,11 @@ const Signup = () => {
           name,
           email,
           password,
-          pic,
         }),
       };
-      const { data } = axios.post(
+      const { data } = await axios.post(
         "/api/user",
-        { name, email, password, pic },
+        { name, email, password },
         config
       );
       toast({
