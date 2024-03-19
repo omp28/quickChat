@@ -3,6 +3,7 @@ import { ChatState } from "../../context/chatProvider";
 import { Box, Text } from "@chakra-ui/react";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import UpdateGroup from "./UpdateGroup";
+import Profile from "./Profile";
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   const { selectedChat, user, setSelectedChat } = ChatState();
@@ -11,6 +12,9 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
       return "Unknown";
     }
     return users[0]._id === loggedUser._id ? users[1].name : users[0].name;
+  };
+  const getSenderFull = (loggedUser, users) => {
+    return users[0]._id === loggedUser._id ? users[1] : users[0];
   };
 
   return (
@@ -30,10 +34,14 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
             <IoMdArrowRoundBack onClick={() => setSelectedChat("")} />
             <>{selectedChat.chatName.toUpperCase()}</>
             <>
-              <UpdateGroup
-                fetchAgain={fetchAgain}
-                setFetchAgain={setFetchAgain}
-              />
+              {!selectedChat.isGroupChat ? (
+                <Profile user={getSenderFull(user, selectedChat.users)} />
+              ) : (
+                <UpdateGroup
+                  fetchAgain={fetchAgain}
+                  setFetchAgain={setFetchAgain}
+                />
+              )}
             </>
           </Text>
           <Box

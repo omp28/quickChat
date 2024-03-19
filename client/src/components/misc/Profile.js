@@ -1,5 +1,15 @@
-import { Icon, useDisclosure } from "@chakra-ui/react";
-import React from "react";
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
+  useDisclosure,
+  Flex,
+  Heading,
+  Text,
+} from "@chakra-ui/react";
 import { FaBell } from "react-icons/fa";
 
 const Profile = ({ user, children }) => {
@@ -8,22 +18,29 @@ const Profile = ({ user, children }) => {
   return (
     <>
       {children ? (
-        <span onClick={onOpen}>{children}</span>
+        <span onClick={onOpen} style={{ cursor: "pointer" }}>
+          {children}
+        </span>
       ) : (
-        <FaBell onClick={onOpen} />
+        <FaBell onClick={onOpen} style={{ cursor: "pointer" }} />
       )}
-      {isOpen && (
-        <div
-          className="fixed top-0 right-0 w-full h-full bg-opacity-50"
-          onClick={onClose}
-        >
-          <div className=" bg-gray-300 mt-28 ml-24 w-full h-full fixed top-0 right-0 p-5 border-4 border-green-800">
-            <h1 className="text-2xl">Profile</h1>
-            <h1 className="text-xl">{user.name}</h1>
-            <h1 className="text-xl">{user.email}</h1>
-          </div>
-        </div>
-      )}
+
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>
+            <Heading className=" text-center text-l">Profile</Heading>
+            <ModalCloseButton />
+          </ModalHeader>
+
+          <ModalBody className=" mb-10 ">
+            <Flex flexDirection="column" align="center">
+              <Text fontSize="lg">User : {user.name}</Text>
+              <Text>User Email : {user.email}</Text>
+            </Flex>
+          </ModalBody>
+        </ModalContent>
+      </Modal>
     </>
   );
 };

@@ -119,17 +119,22 @@ const UpdateGroup = ({ fetchAgain, setFetchAgain }) => {
             fontFamily="Work sans"
             d="flex"
             justifyContent="center"
+            className="text-center"
           >
             {selectedChat.chatName}
           </ModalHeader>
 
           <ModalCloseButton />
           <ModalBody d="flex" flexDir="column" alignItems="center">
-            <Box w="100%" d="flex" flexWrap="wrap" pb={3}>
+            <Box w="100%" flexWrap="wrap" pb={3}>
               <div>
-                group users list
+                <h1 className=" text-2xl ">group users list :</h1>
                 {selectedChat.users.map((u) => (
-                  <div key={u._id}>{u.name}</div>
+                  <div className=" inline-block" key={u._id}>
+                    <h1 className=" mr-4 py-2 px-4 rounded-lg mt-2 bg-gray-300">
+                      {u.name.toUpperCase()}
+                    </h1>
+                  </div>
                 ))}
               </div>
             </Box>
@@ -148,6 +153,7 @@ const UpdateGroup = ({ fetchAgain, setFetchAgain }) => {
                 ml={1}
                 isLoading={renameloading}
                 onClick={handleRename}
+                className=" mb-4"
               >
                 Update
               </Button>
