@@ -32,7 +32,7 @@ const accessChat = async (req, res) => {
     } else {
       const chatData = {
         chatName: "sender",
-        users: [req.user._id, userID, req.body.userID],
+        users: [req.user._id, userID],
         isGroupChat: false,
       };
 
@@ -48,7 +48,12 @@ const accessChat = async (req, res) => {
 const fetchChat = asyncHandler(async (req, res) => {
   try {
     chats
-      .find({ users: { $elemMatch: { $eq: req.user._id } } })
+      .find({
+        $or: [
+          { users: { $elemMatch: { $eq: req.user._id } } },
+          { isGroupChat: true },
+        ],
+      })
       .populate("users", "-password")
       .populate("groupAdmin", "-password")
       .populate("latestMessage")

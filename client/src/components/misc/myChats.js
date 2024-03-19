@@ -19,8 +19,7 @@ const MyChats = ({ fetchAgain }) => {
           Authorization: `Bearer ${user.token}`,
         },
       };
-      const { data } = await axios.get("/api/user", config);
-
+      const { data } = await axios.get("/api/chat", config);
       setChats(data);
     } catch {
       Toast({
@@ -38,11 +37,11 @@ const MyChats = ({ fetchAgain }) => {
     fetchChats();
   }, [fetchAgain]);
 
-  console.log("this is the user chat", chats);
-  console.log("this is the user ", user);
-
-  const getSender = (loggedUser, user) => {
-    return user[0]._id === user[0]._id ? user[1].name : user[0].name;
+  const getSender = (loggedUser, users) => {
+    if (!users || users.length === 0) {
+      return "Unknown";
+    }
+    return users[0]._id === loggedUser._id ? users[1].name : users[0].name;
   };
 
   return (
@@ -91,14 +90,11 @@ const MyChats = ({ fetchAgain }) => {
                 variant="ghost"
                 _hover={{ bg: "gray.200" }}
               >
-                {/* <div className=" py-2 px-6 text-lg font-bold border-b-2 border-b-gray-300 rounded-lg ">
-                  {chat.name}
-                </div> */}
-                <Text>
-                  {!chat.isGroupChat
-                    ? getSender(loggedUser, chat.user)
-                    : chat.chatName}
-                </Text>
+                <div className=" py-2 px-6 text-lg font-bold border-b-2 border-b-gray-300 rounded-lg ">
+                  {chat.isGroupChat
+                    ? chat.chatName
+                    : getSender(loggedUser, chat.users)}
+                </div>
               </Box>
             ))}
           </Stack>

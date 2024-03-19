@@ -51,7 +51,6 @@ const UpdateGroup = ({ fetchAgain, setFetchAgain }) => {
         },
       };
       const { data } = await axios.get(`/api/user?search=${search}`, config);
-      console.log(data);
       setLoading(false);
       setSearchResult(data);
     } catch (error) {
@@ -110,7 +109,6 @@ const UpdateGroup = ({ fetchAgain, setFetchAgain }) => {
 
   return (
     <>
-      {/* <Button onClick={onOpen}>Open Drawer</Button> */}
       <IconButton d="flex" onClick={onOpen} icon={<IoMdEye />} />
 
       <Modal onClose={onClose} isOpen={isOpen} isCentered>
@@ -122,22 +120,20 @@ const UpdateGroup = ({ fetchAgain, setFetchAgain }) => {
             d="flex"
             justifyContent="center"
           >
-            {selectedChat.name}
+            {selectedChat.chatName}
           </ModalHeader>
 
           <ModalCloseButton />
           <ModalBody d="flex" flexDir="column" alignItems="center">
             <Box w="100%" d="flex" flexWrap="wrap" pb={3}>
-              {/* {selectedChat.users.map((u) => (
-                <div
-                  key={u._id}
-                  user={u}
-                  admin={selectedChat.groupAdmin}
-                  //   handleFunction={() => handleRemove(u)}
-                />
-              ))} */}
-              <div>group users list</div>
+              <div>
+                group users list
+                {selectedChat.users.map((u) => (
+                  <div key={u._id}>{u.name}</div>
+                ))}
+              </div>
             </Box>
+
             {/* form control  */}
             <FormControl d="flex">
               <Input

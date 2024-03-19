@@ -16,7 +16,6 @@ import {
   Input,
   useToast,
 } from "@chakra-ui/react";
-// import React from "react";
 import { useState } from "react";
 import { FaSearch, FaBell } from "react-icons/fa";
 import { MdOutlineAccountCircle } from "react-icons/md";

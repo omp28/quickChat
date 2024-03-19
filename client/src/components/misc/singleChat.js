@@ -6,6 +6,12 @@ import UpdateGroup from "./UpdateGroup";
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   const { selectedChat, user, setSelectedChat } = ChatState();
+  const getSender = (loggedUser, users) => {
+    if (!users || users.length === 0) {
+      return "Unknown";
+    }
+    return users[0]._id === loggedUser._id ? users[1].name : users[0].name;
+  };
 
   return (
     <div>
@@ -22,24 +28,13 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
             alignItems="center"
           >
             <IoMdArrowRoundBack onClick={() => setSelectedChat("")} />
-
-            {/* {!selectedChat.isGroupChat ? ( */}
+            <>{selectedChat.chatName.toUpperCase()}</>
             <>
-              {/* {getSender(user, selectedChat.users)}
-                <ProfileModal user={getSenderFull(user, selectedChat.users)} /> */}
-              {selectedChat.name}
-            </>
-            {/* ) : ( */}
-            <>
-              {/* {selectedChat.chatName.toUpperCase()} */}
-
               <UpdateGroup
-                // fetchMessages={fetchMessages}
                 fetchAgain={fetchAgain}
                 setFetchAgain={setFetchAgain}
               />
             </>
-            {/* )} */}
           </Text>
           <Box
             d="flex"
@@ -51,9 +46,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
             h="100%"
             borderRadius="lg"
             overflowY="hidden"
-          >
-            {/* messga here  */}
-          </Box>
+          ></Box>
         </>
       ) : (
         <Box className=" flex justify-center items-center">
