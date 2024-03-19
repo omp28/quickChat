@@ -104,14 +104,14 @@ const renameGroup = asyncHandler(async (req, res) => {
   if (!chatID || !name) {
     return res.status(400).send("Please enter group name and users");
   }
-  const rename = await chats
+  const updatedChat = await chats
     .findByIdAndUpdate(chatID, { chatName: name }, { new: true })
     .populate("users", "-password")
     .populate("groupAdmin", "-password");
   if (!updatedChat) {
     return res.status(400).send("Error renaming group chat");
   } else {
-    res.status(200).send(rename);
+    res.status(200).send(updatedChat);
   }
 });
 

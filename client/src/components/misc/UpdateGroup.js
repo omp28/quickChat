@@ -24,6 +24,7 @@ import { useState } from "react";
 import { ChatState } from "../../context/chatProvider";
 import axios from "axios";
 import { useToast } from "@chakra-ui/react";
+import { IoPersonRemove } from "react-icons/io5";
 
 const UpdateGroup = ({ fetchAgain, setFetchAgain }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -36,9 +37,7 @@ const UpdateGroup = ({ fetchAgain, setFetchAgain }) => {
   const toast = useToast();
 
   const handleSearch = async (search) => {
-    // setSearch(query);
     setSearch(search);
-    // if (!query) {
     if (!search) {
       return;
     }
@@ -79,8 +78,8 @@ const UpdateGroup = ({ fetchAgain, setFetchAgain }) => {
       const { data } = await axios.put(
         `/api/chat/rename`,
         {
-          chatId: selectedChat._id,
-          chatName: groupChatName,
+          chatID: selectedChat._id,
+          name: groupChatName,
         },
         config
       );
@@ -103,9 +102,108 @@ const UpdateGroup = ({ fetchAgain, setFetchAgain }) => {
     }
     setGroupChatName("");
   };
-  const handleRemove = async (user1) => {};
 
-  const handleAddUser = async (user1) => {};
+  const handleRemove = async (user1) => {
+    if (selectedChat.groupAdmin._id !== user._id && user1._id !== user._id) {
+      toast({
+        title: "Only admins can remove someone!",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
+      return;
+    }
+
+    try {
+      setLoading(true);
+      const config = {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      };
+      const { data } = await axios.put(
+        `/api/chat/groupremove`,
+        {
+          chatID: selectedChat._id,
+          userID: user1._id,
+        },
+        config
+      );
+      // if user itself is removed
+      user1._id === user._id ? setSelectedChat() : setSelectedChat(data);
+      setFetchAgain(!fetchAgain);
+      // fetchMessages();
+      setLoading(false);
+    } catch (error) {
+      toast({
+        title: "Error Occured!",
+        description: error.response.data.message,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
+      setLoading(false);
+    }
+    setGroupChatName("");
+  };
+
+  const handleAddUser = async (user1) => {
+    if (selectedChat.users.find((u) => u._id === user1._id)) {
+      toast({
+        title: "User Already in group!",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
+      return;
+    }
+
+    if (selectedChat.groupAdmin._id !== user._id) {
+      toast({
+        title: "Only admins can add someone!",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
+      return;
+    }
+
+    try {
+      setLoading(true);
+      const config = {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      };
+      const { data } = await axios.put(
+        `/api/chat/groupadd`,
+        {
+          chatID: selectedChat._id,
+          userID: user1._id,
+        },
+        config
+      );
+
+      setSelectedChat(data);
+      setFetchAgain(!fetchAgain);
+      setLoading(false);
+    } catch (error) {
+      toast({
+        title: "Error Occured!",
+        description: error.response.data.message,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
+      setLoading(false);
+    }
+    setGroupChatName("");
+  };
 
   return (
     <>
@@ -130,9 +228,18 @@ const UpdateGroup = ({ fetchAgain, setFetchAgain }) => {
               <div>
                 <h1 className=" text-2xl ">group users list :</h1>
                 {selectedChat.users.map((u) => (
-                  <div className=" inline-block" key={u._id}>
-                    <h1 className=" mr-4 py-2 px-4 rounded-lg mt-2 bg-gray-300">
+                  <div
+                    className=" inline-block mr-4 py-1  pl-4 pr-1 rounded-lg mt-2 bg-gray-300 "
+                    key={u._id}
+                  >
+                    <h1 className=" flex items-center justify-center">
                       {u.name.toUpperCase()}
+                      <button className=" bg-red-400 rounded-lg py-2  px-2 ml-4 ">
+                        <IoPersonRemove
+                          className=" text-2xl ml-2"
+                          onClick={() => handleRemove(u)}
+                        />
+                      </button>
                     </h1>
                   </div>
                 ))}
@@ -165,6 +272,23 @@ const UpdateGroup = ({ fetchAgain, setFetchAgain }) => {
                 onChange={(e) => handleSearch(e.target.value)}
               />
             </FormControl>
+            {searchResult?.map((user) => (
+              <Box
+                key={user._id}
+                className=" border-b-2 border-gray-500 py-2 flex my-2"
+              >
+                <h1 className=" w-full flex items-center text-xl px-4 bg-gray-100  rounded-md">
+                  {user.name}
+                </h1>
+                <Button
+                  onClick={() => {
+                    handleAddUser(user);
+                  }}
+                >
+                  Add
+                </Button>
+              </Box>
+            ))}
           </ModalBody>
           <ModalFooter>
             <Button onClick={() => handleRemove(user)} colorScheme="red">
