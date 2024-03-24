@@ -234,9 +234,9 @@ const UpdateGroup = ({ fetchAgain, setFetchAgain }) => {
                   >
                     <h1 className=" flex items-center justify-center">
                       {u.name.toUpperCase()}
-                      <button className=" bg-red-400 rounded-lg py-2  px-2 ml-4 ">
+                      <button className=" rounded-lg py-2  px-2 ml-4 ">
                         <IoPersonRemove
-                          className=" text-2xl ml-2"
+                          className=" text-2xl ml-2 text-red-600"
                           onClick={() => handleRemove(u)}
                         />
                       </button>

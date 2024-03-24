@@ -11,6 +11,7 @@ const MyChats = ({ fetchAgain }) => {
     ChatState();
   const Toast = useToast();
   const [loggedUser, setLoggedUser] = useState();
+  console.log("chatID", selectedChat?._id);
 
   const fetchChats = async () => {
     try {
