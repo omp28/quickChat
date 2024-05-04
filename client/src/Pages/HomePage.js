@@ -15,7 +15,7 @@ const HomePage = () => {
   useEffect(() => {
     const userInfo = JSON.parse(localStorage.getItem("userInfo"));
     if (userInfo) {
-      window.location.href = "/chats";
+      window.location.href = "/chat";
     }
   }, []);
 

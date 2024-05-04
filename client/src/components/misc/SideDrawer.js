@@ -159,7 +159,7 @@ const SideDrawer = () => {
             <DrawerHeader borderBottom="2px ">Search User</DrawerHeader>
 
             <DrawerBody>
-              <Box className="flex">
+              <Box className="flex ">
                 <Input
                   className=" text-black"
                   onChange={(e) => {
@@ -181,7 +181,7 @@ const SideDrawer = () => {
                   {serachResult.map((user) => (
                     <Box
                       key={user._id}
-                      className=" border-b-2 border-gray-500 py-2 flex my-2"
+                      className=" border-b-2 border-gray-500 py-2 flex my-2 "
                     >
                       <Text className=" w-full flex items-center text-xl px-4 bg-gray-100  rounded-md">
                         {user.name}

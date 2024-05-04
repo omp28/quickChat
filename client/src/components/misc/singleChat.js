@@ -162,7 +162,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   };
 
   return (
-    <div className=" h-[90vh] border-2 border-black">
+    <div className=" h-[90vh] border-2 border-white bg-gray-700 text-white ">
       {selectedChat ? (
         <>
           <Text
@@ -198,10 +198,10 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
             flexDir="column"
             justifyContent="flex-end"
             p={3}
-            bg="#E8E8E8"
+            bg="gray.800"
             w="100%"
             borderRadius="lg"
-            className="h-[70vh] overflow-y-scroll"
+            className="h-[65vh] overflow-y-scroll "
             ref={chatContainerRef}
           >
             {loading ? (
@@ -220,9 +220,9 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                     <div
                       className={`${
                         msg.sender._id === user._id
-                          ? "bg-blue-400 text-white"
-                          : "bg-gray-300 text-black"
-                      } p-2 rounded-lg`}
+                          ? " bg-green-300 my-1  text-black rounded-l-xl rounded-t-xl"
+                          : " text-white bg-blue-400 rounded-r-lg rounded-t-lg my-1"
+                      } py-2 px-4 `}
                     >
                       {msg.content}
                     </div>
@@ -230,7 +230,22 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                 ))}
               </div>
             )}
-            <FormControl onKeyDown={sendMessage}>
+          </Box>
+          <div className="flex justify-center items-center">
+            {isTyping ? (
+              <div className="typingIndicatorBubble typingAnimation">
+                <div className="typingIndicatorBubbleDot"></div>
+                <div className="typingIndicatorBubbleDot"></div>
+                <div className="typingIndicatorBubbleDot"></div>
+              </div>
+            ) : (
+              <div className="typingIndicatorBubble">
+                <div className="typingIndicatorBubbleDot"></div>
+                <div className="typingIndicatorBubbleDot"></div>
+                <div className="typingIndicatorBubbleDot"></div>
+              </div>
+            )}
+            <FormControl className=" my-4" onKeyDown={sendMessage}>
               <Input
                 placeholder="Type a message"
                 onChange={typingHandler}
@@ -240,7 +255,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                 onBlur={handleBlur}
               />
             </FormControl>
-          </Box>
+          </div>
         </>
       ) : (
         <Box className=" flex justify-center items-center">
