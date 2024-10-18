@@ -24,7 +24,6 @@ import { ChatState } from "../../context/chatProvider";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import SkeletonChat from "../SkeletonChat";
-import { set } from "mongoose";
 
 const SideDrawer = () => {
   const [search, setSearch] = useState("");
