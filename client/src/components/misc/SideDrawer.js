@@ -60,7 +60,10 @@ const SideDrawer = () => {
           Authorization: `Bearer ${user.token}`,
         },
       };
-      const { data } = await axios.get(`/api/user?search=${search}`, config);
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_API_URL}/api/user?search=${search}`,
+        config
+      );
       if (!chats.find((c) => c._id === data._id))
         setChats((prevChats) => [data, ...prevChats]);
 

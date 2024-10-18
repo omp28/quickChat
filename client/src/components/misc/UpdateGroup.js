@@ -49,7 +49,10 @@ const UpdateGroup = ({ fetchAgain, setFetchAgain }) => {
           Authorization: `Bearer ${user.token}`,
         },
       };
-      const { data } = await axios.get(`/api/user?search=${search}`, config);
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_API_URL}/api/user?search=${search}`,
+        config
+      );
       setLoading(false);
       setSearchResult(data);
     } catch (error) {
@@ -76,7 +79,7 @@ const UpdateGroup = ({ fetchAgain, setFetchAgain }) => {
         },
       };
       const { data } = await axios.put(
-        `/api/chat/rename`,
+        `${process.env.REACT_APP_API_URL}/api/chat/rename`,
         {
           chatID: selectedChat._id,
           name: groupChatName,
@@ -123,7 +126,7 @@ const UpdateGroup = ({ fetchAgain, setFetchAgain }) => {
         },
       };
       const { data } = await axios.put(
-        `/api/chat/groupremove`,
+        `${process.env.REACT_APP_API_URL}/api/chat/groupremove`,
         {
           chatID: selectedChat._id,
           userID: user1._id,
@@ -180,7 +183,7 @@ const UpdateGroup = ({ fetchAgain, setFetchAgain }) => {
         },
       };
       const { data } = await axios.put(
-        `/api/chat/groupadd`,
+        `${process.env.REACT_APP_API_URL}/api/chat/groupadd`,
         {
           chatID: selectedChat._id,
           userID: user1._id,
