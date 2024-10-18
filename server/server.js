@@ -7,10 +7,17 @@ const { notfound, errorHandler } = require("./middleware/error");
 const chatRoutes = require("./routes/chatRoutes");
 const messageRoutes = require("./routes/messageRoute");
 const { addToGroup } = require("./controllers/chatController");
+const cors = require("cors");
 
 dotenv.config();
 connectDB();
 const app = express();
+
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 
 app.get("/", (req, res) => {
   res.send("API is running suceessfully..");
