@@ -56,7 +56,7 @@ const Login = () => {
       });
       localStorage.setItem("userInfo", JSON.stringify(data));
       setLoading(false);
-      // navigate("/chats");
+      navigate("/chat");
     } catch (error) {
       setLoading(false);
       Toast({
