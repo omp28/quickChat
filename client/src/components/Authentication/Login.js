@@ -1,129 +1,151 @@
-import React, { useEffect } from "react";
+// import React, { useEffect } from "react";
+// import { useNavigate } from "react-router-dom";
+// import {
+//   FormControl,
+//   FormLabel,
+//   InputGroup,
+//   InputRightElement,
+//   Button,
+// } from "@chakra-ui/react";
+// import { Input, VStack } from "@chakra-ui/react";
+// import { useState } from "react";
+// import axios from "axios";
+// import { useToast } from "@chakra-ui/react";
+// const Login = () => {
+//   const [show, setShow] = useState(false);
+//   const [email, setEmail] = useState();
+//   const [password, setPassword] = useState();
+//   const [loading, setLoading] = useState(false);
+//   const Toast = useToast();
+//   const navigate = useNavigate();
+
+//   const handClick = () => setShow(!show);
+
+//   useEffect(() => {
+//     const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+//     if (userInfo) {
+//       window.location.href = "/chat";
+//     }
+//   }, [navigate]);
+
+//   const submitHandler = async () => {
+//     setLoading(true);
+//     if (!email || !password) {
+//       setLoading(false);
+//       Toast({
+//         title: "Invalid Input",
+//         description: "Please fill all the fields",
+//         status: "error",
+//         duration: 3000,
+//         isClosable: true,
+//       });
+//       return;
+//     }
+//     try {
+//       const config = {
+//         headers: {
+//           "Content-Type": "application/json",
+//         },
+//       };
+//       const { data } = await axios.post(
+//         `${process.env.REACT_APP_API_URL}/api/user/login`,
+//         { email, password },
+//         config
+//       );
+//       setTimeout(() => {
+//         window.location.href = `/chat?no-cache=${new Date().getTime()}`;
+//       }, 500);
+//       Toast({
+//         title: "Login Success",
+//         description: "Successfully Logged In",
+//         status: "success",
+//         duration: 3000,
+//         isClosable: true,
+//       });
+//       localStorage.setItem("userInfo", JSON.stringify(data));
+//       setLoading(false);
+//     } catch (error) {
+//       setLoading(false);
+//       Toast({
+//         title: "Invalid Input",
+//         description: "Invalid email or password",
+//         status: "error",
+//         duration: 3000,
+//         isClosable: true,
+//       });
+//     }
+//   };
+
+//   return (
+//     <VStack spacing={4}>
+//       <FormControl id="email" isRequired>
+//         <FormLabel>Email</FormLabel>
+//         <Input
+//           placeholder="Enter Your Email"
+//           value={email}
+//           onChange={(e) => setEmail(e.target.value)}
+//         />
+//       </FormControl>
+
+//       <FormControl id="password" isRequired>
+//         <FormLabel>Password</FormLabel>
+//         <InputGroup>
+//           <Input
+//             type={show ? "text" : "password"}
+//             placeholder="Enter Your Password"
+//             value={password}
+//             onChange={(e) => setPassword(e.target.value)}
+//           />
+//           <InputRightElement width="5rem">
+//             <Button h="1.75rem" size="sm" onClick={handClick}>
+//               {show ? "Hide" : "Show"}
+//             </Button>
+//           </InputRightElement>
+//         </InputGroup>
+//       </FormControl>
+
+//       <Button
+//         className=" mt-4"
+//         w="95%"
+//         colorScheme="gray"
+//         variant="solid"
+//         onClick={submitHandler}
+//       >
+//         Login
+//       </Button>
+
+//       <Button
+//         w="95%"
+//         colorScheme="gray"
+//         variant="solid"
+//         onClick={() => {
+//           setEmail("guestuser@gmail.com");
+//           setPassword("guestuser");
+//         }}
+//       >
+//         Guest User
+//       </Button>
+//     </VStack>
+//   );
+// };
+
+// export default Login;
+import React from "react";
+import { Button, VStack } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-import {
-  FormControl,
-  FormLabel,
-  InputGroup,
-  InputRightElement,
-  Button,
-} from "@chakra-ui/react";
-import { Input, VStack } from "@chakra-ui/react";
-import { useState } from "react";
-import axios from "axios";
-import { useToast } from "@chakra-ui/react";
+
 const Login = () => {
-  const [show, setShow] = useState(false);
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-  const [loading, setLoading] = useState(false);
-  const Toast = useToast();
   const navigate = useNavigate();
-
-  const handClick = () => setShow(!show);
-
-  useEffect(() => {
-    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-    if (userInfo) {
-      window.location.href = "/chat";
-    }
-  }, [navigate]);
-
-  const submitHandler = async () => {
-    setLoading(true);
-    if (!email || !password) {
-      setLoading(false);
-      Toast({
-        title: "Invalid Input",
-        description: "Please fill all the fields",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-      });
-      return;
-    }
-    try {
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
-      const { data } = await axios.post(
-        `${process.env.REACT_APP_API_URL}/api/user/login`,
-        { email, password },
-        config
-      );
-      setTimeout(() => {
-        window.location.href = `/chat?no-cache=${new Date().getTime()}`;
-      }, 500);
-      Toast({
-        title: "Login Success",
-        description: "Successfully Logged In",
-        status: "success",
-        duration: 3000,
-        isClosable: true,
-      });
-      localStorage.setItem("userInfo", JSON.stringify(data));
-      setLoading(false);
-    } catch (error) {
-      setLoading(false);
-      Toast({
-        title: "Invalid Input",
-        description: "Invalid email or password",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-      });
-    }
-  };
 
   return (
     <VStack spacing={4}>
-      <FormControl id="email" isRequired>
-        <FormLabel>Email</FormLabel>
-        <Input
-          placeholder="Enter Your Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </FormControl>
-
-      <FormControl id="password" isRequired>
-        <FormLabel>Password</FormLabel>
-        <InputGroup>
-          <Input
-            type={show ? "text" : "password"}
-            placeholder="Enter Your Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <InputRightElement width="5rem">
-            <Button h="1.75rem" size="sm" onClick={handClick}>
-              {show ? "Hide" : "Show"}
-            </Button>
-          </InputRightElement>
-        </InputGroup>
-      </FormControl>
-
-      <Button
-        className=" mt-4"
-        w="95%"
-        colorScheme="gray"
-        variant="solid"
-        onClick={submitHandler}
-      >
-        Login
-      </Button>
-
       <Button
         w="95%"
         colorScheme="gray"
         variant="solid"
-        onClick={() => {
-          setEmail("guestuser@gmail.com");
-          setPassword("guestuser");
-        }}
+        onClick={() => navigate("/chat")}
       >
-        Guest User
+        Go to Chat
       </Button>
     </VStack>
   );
