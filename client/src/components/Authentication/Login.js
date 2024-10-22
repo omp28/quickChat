@@ -10,8 +10,6 @@ import { Input, VStack } from "@chakra-ui/react";
 import { useState } from "react";
 import axios from "axios";
 import { useToast } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
-
 const Login = () => {
   const [show, setShow] = useState(false);
   const [email, setEmail] = useState();
@@ -19,7 +17,6 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const Toast = useToast();
   console.log(email, password);
-  const navigate = useNavigate();
 
   const handClick = () => setShow(!show);
 
@@ -63,8 +60,6 @@ const Login = () => {
       });
       localStorage.setItem("userInfo", JSON.stringify(data));
       setLoading(false);
-
-      navigate("/chat");
 
       setTimeout(() => {
         window.location.reload();
