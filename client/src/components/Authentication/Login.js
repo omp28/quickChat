@@ -62,7 +62,7 @@ const Login = () => {
       setLoading(false);
 
       setTimeout(() => {
-        window.location.reload();
+        window.location.reload(true);
       }, 500);
     } catch (error) {
       setLoading(false);
