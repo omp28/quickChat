@@ -56,7 +56,9 @@ const Login = () => {
       });
       localStorage.setItem("userInfo", JSON.stringify(data));
       setLoading(false);
+
       navigate("/chat");
+      window.location.reload();
     } catch (error) {
       setLoading(false);
       Toast({
@@ -68,6 +70,7 @@ const Login = () => {
       });
     }
   };
+
   return (
     <VStack spacing={4}>
       <FormControl id="email" isRequired>
