@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   FormControl,
   FormLabel,
@@ -22,6 +22,13 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handClick = () => setShow(!show);
+
+  useEffect(() => {
+    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    if (userInfo) {
+      window.location.href = "/chat";
+    }
+  }, []);
 
   const submitHandler = async () => {
     setLoading(true);
