@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   FormControl,
   FormLabel,
@@ -16,7 +17,7 @@ const Login = () => {
   const [password, setPassword] = useState();
   const [loading, setLoading] = useState(false);
   const Toast = useToast();
-  console.log(email, password);
+  const navigate = useNavigate();
 
   const handClick = () => setShow(!show);
 
@@ -25,7 +26,7 @@ const Login = () => {
     if (userInfo) {
       window.location.href = "/chat";
     }
-  }, []);
+  }, [navigate]);
 
   const submitHandler = async () => {
     setLoading(true);
@@ -62,7 +63,7 @@ const Login = () => {
       setLoading(false);
 
       setTimeout(() => {
-        window.location.reload(true);
+        navigate("/chat");
       }, 500);
     } catch (error) {
       setLoading(false);
