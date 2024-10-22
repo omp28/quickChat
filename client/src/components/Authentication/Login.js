@@ -65,7 +65,10 @@ const Login = () => {
       setLoading(false);
 
       navigate("/chat");
-      window.location.reload();
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 500);
     } catch (error) {
       setLoading(false);
       Toast({
