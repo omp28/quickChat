@@ -52,6 +52,9 @@ const Login = () => {
         { email, password },
         config
       );
+      setTimeout(() => {
+        window.location.href = `/chat?no-cache=${new Date().getTime()}`;
+      }, 500);
       Toast({
         title: "Login Success",
         description: "Successfully Logged In",
@@ -61,10 +64,6 @@ const Login = () => {
       });
       localStorage.setItem("userInfo", JSON.stringify(data));
       setLoading(false);
-
-      setTimeout(() => {
-        navigate("/chat");
-      }, 500);
     } catch (error) {
       setLoading(false);
       Toast({
