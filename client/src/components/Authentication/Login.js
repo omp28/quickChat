@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   FormControl,
   FormLabel,
@@ -10,8 +10,6 @@ import { Input, VStack } from "@chakra-ui/react";
 import { useState } from "react";
 import axios from "axios";
 import { useToast } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
-
 const Login = () => {
   const [show, setShow] = useState(false);
   const [email, setEmail] = useState();
@@ -19,9 +17,15 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const Toast = useToast();
   console.log(email, password);
-  const navigate = useNavigate();
 
   const handClick = () => setShow(!show);
+
+  useEffect(() => {
+    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    if (userInfo) {
+      window.location.href = "/chat";
+    }
+  }, []);
 
   const submitHandler = async () => {
     setLoading(true);
@@ -43,7 +47,7 @@ const Login = () => {
         },
       };
       const { data } = await axios.post(
-        "/api/user/login",
+        `${process.env.REACT_APP_API_URL}/api/user/login`,
         { email, password },
         config
       );
@@ -56,7 +60,10 @@ const Login = () => {
       });
       localStorage.setItem("userInfo", JSON.stringify(data));
       setLoading(false);
-      // navigate("/chats");
+
+      setTimeout(() => {
+        window.location.reload(true);
+      }, 500);
     } catch (error) {
       setLoading(false);
       Toast({
@@ -68,6 +75,7 @@ const Login = () => {
       });
     }
   };
+
   return (
     <VStack spacing={4}>
       <FormControl id="email" isRequired>

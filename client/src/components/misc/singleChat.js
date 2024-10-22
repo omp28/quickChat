@@ -13,7 +13,8 @@ import { useEffect } from "react";
 import { useRef } from "react";
 import io from "socket.io-client";
 
-const ENDPOINT = "http://localhost:3000";
+// const ENDPOINT = "http://localhost:3000";
+const ENDPOINT = process.env.REACT_APP_SOCKET_ENDPOINT;
 var socket, selectedChatCompare;
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
@@ -83,7 +84,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         },
       };
       const { data } = await axios.get(
-        `/api/message/${selectedChat._id}`,
+        `${process.env.REACT_APP_API_URL}/api/message/${selectedChat._id}`,
         config
       );
       setMessages(data);
@@ -113,7 +114,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         };
         setNewMessage("");
         const { data } = await axios.post(
-          "/api/message",
+          `${process.env.REACT_APP_API_URL}/api/message`,
           { content: newMessage, chatID: selectedChat._id },
           config
         );
